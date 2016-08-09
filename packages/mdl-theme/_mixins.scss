@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-@import "mdl-animation/mdl-animation";
-@import "mdl-button/mdl-button";
-@import "mdl-card/mdl-card";
-@import "mdl-checkbox/mdl-checkbox";
-@import "mdl-fab/mdl-fab";
-@import "mdl-radio/mdl-radio";
-@import "mdl-ripple/mdl-ripple";
-@import "mdl-theme/mdl-theme";
-@import "mdl-typography/mdl-typography";
+@import "./variables";
+
+@mixin mdl-theme-prop($property, $style) {
+  @if not map-has-key($mdl-theme-property-values, $style) {
+    @error "Invalid style specified! Choose one of #{map-keys($mdl-theme-property-values)}";
+  }
+
+  #{$property}: map-get($mdl-theme-property-values, $style);
+  #{$property}: var(--mdl-theme-#{$style});
+}
